@@ -21,6 +21,7 @@ export default function TodoForm() {
     }
     setTodoWork((prevData) => [...prevData, text]);
     setText("");
+    return;
   };
 
   return (
