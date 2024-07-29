@@ -4,24 +4,24 @@ import "../App.css";
 
 export default function TodoForm() {
   const [text, setText] = useState("");
-  const [todoWork,setTodoWork]=useState([]);
+  const [todoWork, setTodoWork] = useState([]);
   const setValue = (value) => {
     setText(value);
   };
 
-  const handleOnSubmit=(event)=>{
+  const handleOnSubmit = (event) => {
     event.preventDefault();
-    if (!text) return;
-    if(todoWork.includes(text)){
-        alert("Already Exits in the List");
-        setText("");
-
-    };
-    setTodoWork((prevData)=>[...prevData,text]);
+    if (!text) {
+      alert("You must write something");
+      return;
+    }
+    if (todoWork.includes(text)) {
+      alert("Already Exits in the List");
+      setText("");
+    }
+    setTodoWork((prevData) => [...prevData, text]);
     setText("");
-    
-    
-  }
+  };
 
   return (
     <>
@@ -31,20 +31,20 @@ export default function TodoForm() {
       <section>
         <form onSubmit={handleOnSubmit}>
           <div className="inputDiv">
-            <input type="text" value={text} onChange={(e) => setValue(e.target.value)} />
+            <input
+              type="text"
+              value={text}
+              onChange={(e) => setValue(e.target.value)}
+            />
             <button>Add Tasks</button>
           </div>
         </form>
 
-        {
-            todoWork.map((currentVal,key)=>
-                <h5 key={key}>{currentVal} <RiDeleteBin6Line className="deleteIcon"/></h5>
-            )
-
-        }
-        
-
-   
+        {todoWork.map((currentVal, key) => (
+          <h5 key={key}>
+            {currentVal} <RiDeleteBin6Line className="deleteIcon" />
+          </h5>
+        ))}
       </section>
     </>
   );
