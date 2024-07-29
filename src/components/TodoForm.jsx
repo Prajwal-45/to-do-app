@@ -18,10 +18,11 @@ export default function TodoForm() {
     if (todoWork.includes(text)) {
       alert("Already Exits in the List");
       setText("");
+      return;
     }
     setTodoWork((prevData) => [...prevData, text]);
     setText("");
-    return;
+    
   };
 
   return (
