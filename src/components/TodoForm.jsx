@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { RiDeleteBin6Line } from "react-icons/ri";
+import { MdCheckCircleOutline } from "react-icons/md";
+import { MdDeleteForever } from "react-icons/md";
 import "../App.css";
 
 export default function TodoForm() {
@@ -41,12 +42,30 @@ export default function TodoForm() {
             <button>Add Tasks</button>
           </div>
         </form>
+        </section>
 
-        {todoWork.map((currentVal, key) => (
-          <h5 key={key}>
-            {currentVal} <RiDeleteBin6Line className="deleteIcon" />
-          </h5>
-        ))}
+        <section>
+          <ul>
+           {
+            todoWork.map((currentValue,key)=>{
+              return(
+                <li key={key}>
+                  <div>
+                    
+                  <span><b>{currentValue}</b></span>
+                  </div>
+                  <div className="IconsProperty">
+                  <MdCheckCircleOutline className="check"/>
+                  <MdDeleteForever className="delete"/>
+                  </div>
+                </li>
+              )
+            })
+
+
+           }
+        </ul>
+       
       </section>
     </>
   );
