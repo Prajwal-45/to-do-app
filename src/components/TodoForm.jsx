@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdCheckCircleOutline } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
 import "../App.css";
@@ -6,7 +6,7 @@ import "../App.css";
 export default function TodoForm() {
   const [text, setText] = useState("");
   const [todoWork, setTodoWork] = useState([]);
-  const [dateTime,setDateTime]=useState("");
+  const [dateTime, setDateTime] = useState("");
   const setValue = (value) => {
     setText(value);
   };
@@ -24,16 +24,17 @@ export default function TodoForm() {
     }
     setTodoWork((prevData) => [...prevData, text]);
     setText("");
-    
   };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const date = new Date();
+      const formattedDate = date.toLocaleDateString();
+      const formattedTime = date.toLocaleTimeString();
+      setDateTime(`${formattedDate} - ${formattedTime}`);
+    }, 1000);
 
-  setInterval(()=>{
-  const date=new Date();
-  const formattedDate=date.toLocaleDateString();
-  const formattedTime=date.toLocaleTimeString();
-  setDateTime(`${formattedDate} - ${formattedTime}`);
-
-  },1000)
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -41,8 +42,7 @@ export default function TodoForm() {
         <h1>Todo List</h1>
       </header>
       <h4>{dateTime}</h4>
-     
-      
+
       <section>
         <form onSubmit={handleOnSubmit}>
           <div className="inputDiv">
@@ -54,30 +54,26 @@ export default function TodoForm() {
             <button>Add Tasks</button>
           </div>
         </form>
-        </section>
+      </section>
 
-        <section>
-          <ul>
-           {
-            todoWork.map((currentValue,key)=>{
-              return(
-                <li key={key}>
-                  <div>
-                    
-                  <span><b>{currentValue}</b></span>
-                  </div>
-                  <div className="IconsProperty">
-                  <MdCheckCircleOutline className="check"/>
-                  <MdDeleteForever className="delete"/>
-                  </div>
-                </li>
-              )
-            })
-
-
-           }
+      <section>
+        <ul>
+          {todoWork.map((currentValue, key) => {
+            return (
+              <li key={key}>
+                <div>
+                  <span>
+                    <b>{currentValue}</b>
+                  </span>
+                </div>
+                <div className="IconsProperty">
+                  <MdCheckCircleOutline className="check" />
+                  <MdDeleteForever className="delete" />
+                </div>
+              </li>
+            );
+          })}
         </ul>
-       
       </section>
     </>
   );
