@@ -51,6 +51,7 @@ input{
   background-color: white;
   cursor: pointer;
   transition: border-color 0.25s;
+  border: 1px solid #969696;
 
 }
 
