@@ -4,12 +4,9 @@ import { MdDeleteForever } from "react-icons/md";
 import "../App.css";
 
 export default function TodoForm() {
-  const dateTime=new Date();
-  const dd=dateTime.getDate();
-  const mm=dateTime.getMonth();
-  const yyyy=dateTime.getFullYear();
   const [text, setText] = useState("");
   const [todoWork, setTodoWork] = useState([]);
+  const [dateTime,setDateTime]=useState("");
   const setValue = (value) => {
     setText(value);
   };
@@ -30,12 +27,20 @@ export default function TodoForm() {
     
   };
 
+  setInterval(()=>{
+  const date=new Date();
+  const formattedDate=date.toLocaleDateString();
+  const formattedTime=date.toLocaleTimeString();
+  setDateTime(`${formattedDate} - ${formattedTime}`);
+
+  },1000)
+
   return (
     <>
       <header>
         <h1>Todo List</h1>
       </header>
-      <h4>Date : {dd}-{mm}-{yyyy}</h4>
+      <h4>{dateTime}</h4>
      
       
       <section>
