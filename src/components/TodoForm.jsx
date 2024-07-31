@@ -17,6 +17,7 @@ export default function TodoForm() {
       alert("You must write something");
       return;
     }
+
     if (todoWork.includes(text)) {
       alert("Already Exits in the List");
       setText("");
@@ -35,6 +36,15 @@ export default function TodoForm() {
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleClearAll = () => {
+    setTodoWork([]);
+  };
+
+  const handleSingleDelete = (currentValue) => {
+    const updatedToDoWork = todoWork.filter((value) => value != currentValue);
+    setTodoWork(updatedToDoWork);
+  };
 
   return (
     <>
@@ -68,13 +78,18 @@ export default function TodoForm() {
                 </div>
                 <div className="IconsProperty">
                   <MdCheckCircleOutline className="check" />
-                  <MdDeleteForever className="delete" />
+                  <MdDeleteForever
+                    className="delete"
+                    onClick={() => handleSingleDelete(currentValue)}
+                  />
                 </div>
               </li>
             );
           })}
-        </ul>
+        </ul>  
       </section>
+      <button onClick={handleClearAll}>Clear All</button>
+      
     </>
   );
 }
