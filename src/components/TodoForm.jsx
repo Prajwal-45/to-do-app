@@ -1,58 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { MdCheckCircleOutline } from "react-icons/md";
-import { MdDeleteForever } from "react-icons/md";
-import "../App.css";
+import React, { useState } from "react";
 
-export default function TodoForm() {
-  const [text, setText] = useState("");
-  const [todoWork, setTodoWork] = useState([]);
-  const [dateTime, setDateTime] = useState("");
+export default function TodoForm({ onAddTodo, setText, text }) {
   const setValue = (value) => {
     setText(value);
   };
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    if (!text) {
-      alert("You must write something");
-      return;
-    }
-
-    if (todoWork.includes(text)) {
-      alert("Already Exits in the List");
-      setText("");
-      return;
-    }
-    setTodoWork((prevData) => [...prevData, text]);
+    onAddTodo(text);
     setText("");
-  };
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const date = new Date();
-      const formattedDate = date.toLocaleDateString();
-      const formattedTime = date.toLocaleTimeString();
-      setDateTime(`${formattedDate} - ${formattedTime}`);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleClearAll = () => {
-    setTodoWork([]);
-  };
-
-  const handleSingleDelete = (currentValue) => {
-    const updatedToDoWork = todoWork.filter((value) => value != currentValue);
-    setTodoWork(updatedToDoWork);
   };
 
   return (
     <>
-      <header>
-        <h1>Todo List</h1>
-      </header>
-      <h4>{dateTime}</h4>
-
       <section>
         <form onSubmit={handleOnSubmit}>
           <div className="inputDiv">
@@ -65,31 +25,6 @@ export default function TodoForm() {
           </div>
         </form>
       </section>
-
-      <section>
-        <ul>
-          {todoWork.map((currentValue, key) => {
-            return (
-              <li key={key}>
-                <div>
-                  <span>
-                    <b>{currentValue}</b>
-                  </span>
-                </div>
-                <div className="IconsProperty">
-                  <MdCheckCircleOutline className="check" />
-                  <MdDeleteForever
-                    className="delete"
-                    onClick={() => handleSingleDelete(currentValue)}
-                  />
-                </div>
-              </li>
-            );
-          })}
-        </ul>  
-      </section>
-      <button onClick={handleClearAll}>Clear All</button>
-      
     </>
   );
 }

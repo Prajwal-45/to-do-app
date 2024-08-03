@@ -1,13 +1,13 @@
 
 import './App.css'
-import TodoForm from './components/TodoForm'
+import Todo from './components/Todo.jsx'
 
 function App() {
 
 
   return (
     <>
-    <TodoForm/>
+    <Todo/>
       
     </>
   )
