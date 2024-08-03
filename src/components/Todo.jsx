@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../App.css";
 import TodoForm from "./TodoForm";
 import TodoListController from "./TodoListController";
+import DateTimeController from "./DateTimeController";
 
 export default function Todo() {
   const [text, setText] = useState("");
@@ -21,16 +22,6 @@ export default function Todo() {
     }
     setTodoWork((prevData) => [...prevData, text]);
   };
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const date = new Date();
-      const formattedDate = date.toLocaleDateString();
-      const formattedTime = date.toLocaleTimeString();
-      setDateTime(`${formattedDate} - ${formattedTime}`);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   const handleClearAll = () => {
     setTodoWork([]);
@@ -46,7 +37,7 @@ export default function Todo() {
       <header>
         <h1>Todo List</h1>
       </header>
-      <h4>{dateTime}</h4>
+      <DateTimeController dateTime={dateTime} setDateTime={setDateTime} />
       <TodoForm onAddTodo={handleOnSubmit} setText={setText} text={text} />
       <TodoListController
         todoWork={todoWork}
