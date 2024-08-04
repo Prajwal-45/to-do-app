@@ -41,6 +41,14 @@ li{
   margin-top: 5px;
   
 }
+.toDoApp {
+  position: fixed; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;  
+}
+
 .IconsProperty{
   display: flex;
   margin-right: 15px;

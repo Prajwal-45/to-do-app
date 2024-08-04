@@ -23,7 +23,9 @@ export default function Todo() {
       alert("Already exists in the list");
       return;
     }
-    setTodoWork((prevData) => [...prevData, { id, content, checked }]);
+    setTodoWork((prevData) =>
+      [...prevData, { id, content, checked }].reverse()
+    );
   };
 
   const handleSingleDelete = (currentValue) => {
@@ -49,17 +51,19 @@ export default function Todo() {
 
   return (
     <>
-      <header>
-        <h1>Todo List</h1>
-      </header>
-      <DateTimeController dateTime={dateTime} setDateTime={setDateTime} />
-      <TodoForm onAddTodo={handleOnSubmit} setText={setText} text={text} />
-      <TodoListController
-        todoWork={todoWork}
-        onSingleDelete={handleSingleDelete}
-        onhandleChecked={onhandleChecked}
-      />
-      <button onClick={handleClearAll}>Clear All</button>
+      <div className="toDoApp">
+        <header>
+          <h1>Todo List</h1>
+        </header>
+        <DateTimeController dateTime={dateTime} setDateTime={setDateTime} />
+        <TodoForm onAddTodo={handleOnSubmit} setText={setText} text={text} />
+        <TodoListController
+          todoWork={todoWork}
+          onSingleDelete={handleSingleDelete}
+          onhandleChecked={onhandleChecked}
+        />
+        <button onClick={handleClearAll}>Clear All</button>
+      </div>
     </>
   );
 }
