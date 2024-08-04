@@ -56,3 +56,12 @@ li{
   background: red;
 
 }
+.checked {
+  text-decoration: line-through;
+  text-decoration-color: rgb(172, 59, 59); 
+  text-decoration-thickness: 3px;
+  
+}
+.unchecked{
+  text-decoration: none;
+}

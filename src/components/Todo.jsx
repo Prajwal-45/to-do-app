@@ -5,30 +5,45 @@ import TodoListController from "./TodoListController";
 import DateTimeController from "./DateTimeController";
 
 export default function Todo() {
-  const [text, setText] = useState("");
+  const [text, setText] = useState({});
   const [todoWork, setTodoWork] = useState([]);
   const [dateTime, setDateTime] = useState("");
 
   const handleOnSubmit = (text) => {
-    if (!text) {
+    const { id, content, checked } = text;
+    if (!content) {
       alert("You must write something");
       return;
     }
 
-    if (todoWork.includes(text)) {
-      alert("Already Exits in the List");
-      setText("");
+    const ifContentMatched = todoWork.find(
+      (todoWork) => todoWork.content === content
+    );
+    if (ifContentMatched) {
+      alert("Already exists in the list");
       return;
     }
-    setTodoWork((prevData) => [...prevData, text]);
+    setTodoWork((prevData) => [...prevData, { id, content, checked }]);
   };
 
+  const handleSingleDelete = (currentValue) => {
+    const updatedToDoWork = todoWork.filter(
+      (value) => value.content != currentValue
+    );
+    setTodoWork(updatedToDoWork);
+  };
   const handleClearAll = () => {
     setTodoWork([]);
   };
 
-  const handleSingleDelete = (currentValue) => {
-    const updatedToDoWork = todoWork.filter((value) => value != currentValue);
+  const onhandleChecked = (value) => {
+    const updatedToDoWork = todoWork.map((currentValue) => {
+      if (currentValue.content === value.content) {
+        return { ...currentValue, checked: !currentValue.checked };
+      } else {
+        return currentValue;
+      }
+    });
     setTodoWork(updatedToDoWork);
   };
 
@@ -42,6 +57,7 @@ export default function Todo() {
       <TodoListController
         todoWork={todoWork}
         onSingleDelete={handleSingleDelete}
+        onhandleChecked={onhandleChecked}
       />
       <button onClick={handleClearAll}>Clear All</button>
     </>

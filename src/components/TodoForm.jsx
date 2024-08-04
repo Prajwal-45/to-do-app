@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 export default function TodoForm({ onAddTodo, setText, text }) {
   const setValue = (value) => {
-    setText(value);
+    setText({ id: value, content: value, checked: false });
   };
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
     onAddTodo(text);
-    setText("");
+    setText({ id: "", content: "", checked: false });
   };
 
   return (
@@ -18,7 +18,7 @@ export default function TodoForm({ onAddTodo, setText, text }) {
           <div className="inputDiv">
             <input
               type="text"
-              value={text}
+              value={text.content ? text.content : ""}
               onChange={(e) => setValue(e.target.value)}
             />
             <button>Add Tasks</button>
