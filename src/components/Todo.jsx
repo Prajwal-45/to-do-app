@@ -66,7 +66,10 @@ export default function Todo() {
           onSingleDelete={handleSingleDelete}
           onhandleChecked={onhandleChecked}
         />
-        <button onClick={handleClearAll}>Clear All</button>
+
+        {todoWork.length > 0 && (
+          <button onClick={handleClearAll}>Clear All</button>
+        )}
       </div>
     </>
   );
