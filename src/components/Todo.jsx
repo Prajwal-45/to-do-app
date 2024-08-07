@@ -60,7 +60,7 @@ export default function Todo() {
     <>
       <div className="toDoApp">
         <header>
-          <h1>Todo List</h1>
+          <h1>Task Manager</h1>
         </header>
         <DateTimeController dateTime={dateTime} setDateTime={setDateTime} />
         <TodoForm onAddTodo={handleOnSubmit} setText={setText} text={text} />
