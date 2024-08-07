@@ -4,9 +4,17 @@ import TodoForm from "./TodoForm";
 import TodoListController from "./TodoListController";
 import DateTimeController from "./DateTimeController";
 
+const localTodoKey = "TodoWork";
+
 export default function Todo() {
   const [text, setText] = useState({});
-  const [todoWork, setTodoWork] = useState([]);
+  const [todoWork, setTodoWork] = useState(() => {
+    const rawTodoWork = localStorage.getItem(localTodoKey);
+    if (!rawTodoWork) {
+      return [];
+    }
+    return JSON.parse(rawTodoWork);
+  });
   const [dateTime, setDateTime] = useState("");
 
   const handleOnSubmit = (text) => {
@@ -37,6 +45,8 @@ export default function Todo() {
   const handleClearAll = () => {
     setTodoWork([]);
   };
+
+  localStorage.setItem(localTodoKey, JSON.stringify(todoWork));
 
   const onhandleChecked = (value) => {
     const updatedToDoWork = todoWork.map((currentValue) => {
