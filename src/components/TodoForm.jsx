@@ -21,7 +21,7 @@ export default function TodoForm({ onAddTodo, setText, text }) {
               value={text.content ? text.content : ""}
               onChange={(e) => setValue(e.target.value)}
             />
-            <button>Add Tasks</button>
+            <button className="inputTaskButton">Add Tasks</button>
           </div>
         </form>
       </section>

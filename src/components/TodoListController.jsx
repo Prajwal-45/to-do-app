@@ -10,19 +10,29 @@ export default function TodoListController({
 }) {
   return (
     <>
-      <section>
-        <ul>
+    
+      {todoWork.length > 0 && (
+        <table>
+          <tr>
+            <th className="tableHeading">Task</th>
+            <th className="tableHeading">Created At</th>
+            <th className="tableHeading">Action</th>
+          </tr>
+
           {todoWork.map((currentValue) => {
             return (
-              <li key={currentValue.id}>
-                <div>
+              <tr key={currentValue.id} className="taskData">
+                <td>
                   <span
                     className={currentValue.checked ? "checked" : "Unchecked"}
                   >
                     <b>{currentValue.content}</b>
                   </span>
-                </div>
-                <div className="IconsProperty">
+                </td>
+                <td>
+                  <b>{currentValue.dateTime}</b>
+                </td>
+                <td className="IconsProperty">
                   <MdCheckCircleOutline
                     className="check"
                     onClick={() => onhandleChecked(currentValue)}
@@ -31,12 +41,13 @@ export default function TodoListController({
                     className="delete"
                     onClick={() => onSingleDelete(currentValue.content)}
                   />
-                </div>
-              </li>
+                </td>
+              </tr>
             );
           })}
-        </ul>
-      </section>
+        </table>
+      )}
+     
     </>
   );
 }

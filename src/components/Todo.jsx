@@ -14,7 +14,7 @@ export default function Todo() {
   const [dateTime, setDateTime] = useState("");
 
   const handleOnSubmit = (text) => {
-    const { id, content, checked } = text;
+ const { id, content, checked } = text;
     if (!content) {
       alert("You must write something");
       return;
@@ -27,7 +27,10 @@ export default function Todo() {
       alert("Already exists in the list");
       return;
     }
-    setTodoWork((prevData) => [{ id, content, checked }, ...prevData]);
+    setTodoWork((prevData) => [
+      { id, content, dateTime, checked },
+      ...prevData,
+    ]);
   };
 
   setLocalStorageData(todoWork);
@@ -68,7 +71,9 @@ export default function Todo() {
         />
 
         {todoWork.length > 0 && (
-          <button onClick={handleClearAll}>Clear All</button>
+          <button className="clearAllButton" onClick={handleClearAll}>
+            Clear All
+          </button>
         )}
       </div>
     </>
