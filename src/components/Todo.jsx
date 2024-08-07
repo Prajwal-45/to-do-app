@@ -3,18 +3,14 @@ import "../App.css";
 import TodoForm from "./TodoForm";
 import TodoListController from "./TodoListController";
 import DateTimeController from "./DateTimeController";
-
-const localTodoKey = "TodoWork";
+import {
+  getLocalStorageData,
+  setLocalStorageData,
+} from "./LocalDataStorageController";
 
 export default function Todo() {
   const [text, setText] = useState({});
-  const [todoWork, setTodoWork] = useState(() => {
-    const rawTodoWork = localStorage.getItem(localTodoKey);
-    if (!rawTodoWork) {
-      return [];
-    }
-    return JSON.parse(rawTodoWork);
-  });
+  const [todoWork, setTodoWork] = useState(() => getLocalStorageData());
   const [dateTime, setDateTime] = useState("");
 
   const handleOnSubmit = (text) => {
@@ -36,6 +32,8 @@ export default function Todo() {
     );
   };
 
+  setLocalStorageData(todoWork);
+
   const handleSingleDelete = (currentValue) => {
     const updatedToDoWork = todoWork.filter(
       (value) => value.content != currentValue
@@ -45,8 +43,6 @@ export default function Todo() {
   const handleClearAll = () => {
     setTodoWork([]);
   };
-
-  localStorage.setItem(localTodoKey, JSON.stringify(todoWork));
 
   const onhandleChecked = (value) => {
     const updatedToDoWork = todoWork.map((currentValue) => {
