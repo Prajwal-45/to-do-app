@@ -27,9 +27,7 @@ export default function Todo() {
       alert("Already exists in the list");
       return;
     }
-    setTodoWork((prevData) =>
-      [...prevData, { id, content, checked }].reverse()
-    );
+    setTodoWork((prevData) => [{ id, content, checked }, ...prevData]);
   };
 
   setLocalStorageData(todoWork);
